@@ -37,7 +37,8 @@ env:
   
   IS_RELEASE: ${{ startsWith(github.ref, 'refs/tags/') }}
   RELEASE_TAG: ${{ github.ref_name }}
-  PROJECT_DIR: ./SharedScans.Reloaded
+  PROJECT_NAME: SharedScans.Reloaded
+  INTERFACES_NAME: SharedScans.Interfaces
 
 jobs:
   build:
@@ -81,10 +82,23 @@ jobs:
         }
         
     - name: Build
-      run: ${{ env.PROJECT_DIR }}/Publish.ps1
+      run: ${{ env.PROJECT_NAME }}/Publish.ps1
 
     - name: Copy Build
-      run: Copy-Item -Force -Path "${{ env.PROJECT_DIR }}/Publish/*" -Destination "./Publish" -Recurse
+      run: Copy-Item -Force -Path "${{ env.PROJECT_NAME }}/Publish/*" -Destination "./Publish" -Recurse
+
+    - name: Build Interfaces
+      run: |
+        if ($env:IS_RELEASE -eq 'true') {
+            dotnet pack ${{ env.INTERFACES_NAME }} -c Release --output .
+        }
+        else {
+            dotnet pack ${{ env.INTERFACES_NAME }} -c Release --output .
+        }
+
+    - name: Push Interfaces to Nuget
+      if: env.IS_RELEASE == 'true'
+      run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
     - name: Upload GitHub Release Artifact
       uses: actions/upload-artifact@v2.2.4
