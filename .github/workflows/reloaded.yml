@@ -98,7 +98,7 @@ jobs:
 
     - name: Push Interfaces to Nuget
       if: env.IS_RELEASE == 'true'
-      run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
     - name: Upload GitHub Release Artifact
       uses: actions/upload-artifact@v4
