@@ -48,4 +48,18 @@ public interface ISharedScans
     /// </summary>
     /// <param name="success">Success callback.</param>
     void CreateListener<TFunction>(Action<nint> success);
+
+    /// <summary>
+    /// Broadcast a scan result.
+    /// </summary>
+    /// <typeparam name="TFunction">Function to use as Scan ID.</typeparam>
+    /// <param name="result">Scan result.</param>
+    void Broadcast<TFunction>(nint result);
+
+    /// <summary>
+    /// Broadcast a scan result.
+    /// </summary>
+    /// <param name="id">Scan ID.</param>
+    /// <param name="result">Scan result.</param>
+    void Broadcast(string id, nint result);
 }

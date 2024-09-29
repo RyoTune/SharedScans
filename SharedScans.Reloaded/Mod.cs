@@ -39,7 +39,7 @@ public class Mod : ModBase, IExports
 #endif
 
         this.modLoader.GetController<IStartupScanner>().TryGetTarget(out var scanner);
-        this.scans = new(new(scanner!, this.hooks));
+        this.scans = new(new(scanner!, this.hooks), this.hooks);
         this.modLoader.AddOrReplaceController<ISharedScans>(this.owner, this.scans);
 
         this.ApplyConfig();
