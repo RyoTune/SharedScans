@@ -2,7 +2,7 @@
   "ModId": "SharedScans.Reloaded",
   "ModName": "Shared Scans",
   "ModAuthor": "RyoTune",
-  "ModVersion": "1.2.2",
+  "ModVersion": "1.2.3",
   "ModDescription": "Utility library for streamlining sharing scans between mods.",
   "ModDll": "SharedScans.Reloaded.dll",
   "ModIcon": "Preview.png",
@@ -37,10 +37,6 @@
           "ReleaseMetadataName": "Sewer56.Update.ReleaseMetadata.json"
         }
       }
-    },
-    "GameBanana": {
-      "ItemType": "Mod",
-      "ItemId": 495507
     },
     "GitHubRelease": {
       "UserName": "RyoTune",
