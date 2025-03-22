@@ -12,6 +12,7 @@ internal class SharedScansService(IReloadedHooks hooks) : ISharedScans
         if (string.IsNullOrEmpty(pattern))
         {
             Log.Verbose($"{id}: No pattern given.");
+            ScanHooks.Listen(id, (hooks, result) => SendResult(id, hooks, result));
             return;
         }
 
