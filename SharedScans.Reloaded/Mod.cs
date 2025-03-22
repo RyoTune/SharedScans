@@ -6,7 +6,6 @@ using SharedScans.Reloaded.Configuration;
 using SharedScans.Reloaded.Scans;
 using SharedScans.Reloaded.Template;
 using System.Diagnostics;
-using System.Drawing;
 
 namespace SharedScans.Reloaded;
 
@@ -31,7 +30,7 @@ public class Mod : ModBase, IExports
         this.config = context.Configuration;
         this.modConfig = context.ModConfig;
 
-        Project.Init(this.modConfig, this.modLoader, this.log);
+        Project.Initialize(this.modConfig, this.modLoader, this.log);
         Log.LogLevel = this.config.LogLevel;
 
 #if DEBUG
@@ -39,7 +38,7 @@ public class Mod : ModBase, IExports
 #endif
 
         this.modLoader.GetController<IStartupScanner>().TryGetTarget(out var scanner);
-        this.scans = new(new(scanner!, this.hooks), this.hooks);
+        this.scans = new(this.hooks);
         this.modLoader.AddOrReplaceController<ISharedScans>(this.owner, this.scans);
 
         this.ApplyConfig();
