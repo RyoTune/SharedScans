@@ -1,5 +1,4 @@
 ﻿using Reloaded.Hooks.ReloadedII.Interfaces;
-using Reloaded.Memory.SigScan.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
 using SharedScans.Interfaces;
 using SharedScans.Reloaded.Configuration;
@@ -37,7 +36,6 @@ public class Mod : ModBase, IExports
         Debugger.Launch();
 #endif
 
-        this.modLoader.GetController<IStartupScanner>().TryGetTarget(out var scanner);
         this.scans = new(this.hooks);
         this.modLoader.AddOrReplaceController<ISharedScans>(this.owner, this.scans);
 
